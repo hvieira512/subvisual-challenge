@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import PokemonInfo from './components/PokemonInfo/PokemonInfo.jsx';
 import { getBestMatch } from './utils/utils.js';
+import PokemonInfo from './components/PokemonInfo/PokemonInfo.jsx';
+import Button from './components/Button/Button.jsx';
 import './main.css';
 
 const App = () => {
@@ -90,13 +91,20 @@ const App = () => {
         ))}
       </ul>
       {selectedPokemon && <PokemonInfo pokemon={selectedPokemon} />}
-      <div>
-        <button onClick={handlePrevious} disabled={curPokeId === 1}>
-          Previous
-        </button>
-        <button onClick={handleNext} disabled={curPokeId === 1025}>
-          Next
-        </button>
+      <div className="navigation">
+        <Button
+          onClick={handlePrevious}
+          disabled={curPokeId === 1}
+          icon="←"
+          text="Back"
+        />
+        <Button
+          onClick={handleNext}
+          disabled={curPokeId === 1025}
+          icon="→"
+          text="Next"
+          order="reversed"
+        />
       </div>
     </div>
   </>);
