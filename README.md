@@ -14,9 +14,7 @@ My main struggle was using useEffect since I've didn't had a lot of experience w
 In terms of features, I've added a few things:
 
 1. **Added a Preview List**: while the user is searching, a list will appear with the possible matches. Since I was already trying to compare the best matches, I saw this as an opportunity to show the user what Pokémon he might be trying to find.
-2. **Created a Reset Button**: in case the user wants to go back to the start.
-
-I did not complete automated tests since I did not had the time for it
+2. **Created a Reset Button**: in case the user wants to go back to the start. 
 
 # Installation
 
@@ -30,11 +28,11 @@ In order to install this project, you'll need node and npm installed on your sys
    If you prefer using a package manger, use your preferred one to install it
 
    ```bash
-   # Ubuntu
-   sudo apt install npm
-
    # Arch
    sudo pacman -S nodejs npm
+
+   # Ubuntu
+   sudo apt install npm
 
    # Choco (Windows)
    choco install nodejs-lts
@@ -43,6 +41,13 @@ In order to install this project, you'll need node and npm installed on your sys
    brew install node
    
    # Others...
+   ```
+
+   After installing it, let's verify if everything installed correctly
+
+   ```bash
+   node -v
+   npm -v
    ```
 
    You should see the version numbers for Node.js and npm.
@@ -123,7 +128,13 @@ If you're on Windows, follow these steps:
    After the dependencies were installed, let's finally start the project!
 
    ```bash
-   npm start
+   npm run dev
+   ```
+
+   Open your browser and typing the following URL:
+
+   ```
+   localhost:5173
    ```
 
 # Troubleshooting
