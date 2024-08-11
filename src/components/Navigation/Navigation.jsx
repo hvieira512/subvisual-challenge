@@ -14,7 +14,7 @@ const Navigation = ({ pokemonId, onNavigate }) => {
                 disabled={pokemonId >= 1025}
                 order="reversed"
                 icon="→"
-                text="Next" />
+                text={"Next"} />
         </div>
     );
 }
