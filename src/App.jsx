@@ -1,45 +1,89 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Search from './components/Search/Search';
 import PokemonInfo from './components/PokemonInfo/PokemonInfo';
 import Navigation from './components/Navigation/Navigation';
 import './main.css';
 
 const App = () => {
-  const [pokemon, setPokemon] = useState(null);
+  const [pokeList, setPokeList] = useState([]);
+  const [filteredPokeList, setFilteredPokeList] = useState([]);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
-  const fetchPokemon = async (name) => {
-    if (!name) {
-      setError('Please enter a Pokemon name.');
-      return;
-    }
+  const fetchPokeData = async () => {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1025');
+    const data = await response.json();
+    return data;
+    //return data.results.map(pokemon => pokemon.name);
+  }
 
-    let baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
-    name = String(name).toLowerCase();
-
-    try {
-      const response = await fetch(`${baseUrl}${name}`);
-
-      if (!response.ok) {
-        throw new Error('Pokemon not found');
-      }
-
-      const data = await response.json();
-
-      setPokemon(data);
-      setError(null);
-    } catch (err) {
-      setPokemon(null);
-      setError(err.message);
+  // Fetch the Pokemon Names Data when the component mounts
+  useEffect(() => {
+    const loadPokeData = async () => {
+      setPokeList(await fetchPokeData());
     };
+    loadPokeData();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.length >= 3) {
+      const pokeNames = pokeList.results.map(pokemon => pokemon.name);
+      const filtered = pokeNames.filter(pokemon =>
+        pokemon.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredPokeList(filtered);
+    } else {
+      setFilteredPokeList([]);
+    }
+  }, [searchQuery, pokeList]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  }
+
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    if (filteredPokeList.length > 0) {
+      const bestMatch = filteredPokeList[0];
+      console.log(bestMatch);
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${bestMatch}`);
+        const data = await response.json();
+        setSelectedPokemon(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    }
   }
 
   return (<>
-    <div className="App">
-      <Search onSearch={fetchPokemon} />
-      {error && <p>{error}</p>}
-      {pokemon && <PokemonInfo pokemon={pokemon} />}
-      <Navigation pokemonId={pokemon?.id} onNavigate={fetchPokemon} />
+    <div>
+      <form onSubmit={handleSearchSubmit}>
+        <input
+          type="text"
+          placeholder="Search Pokemon..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+        <button type='submit'>Search</button>
+      </form>
+      <ul>
+        {filteredPokeList.map((pokemon, index) => (
+          <li key={index}>{pokemon}</li>
+        ))}
+      </ul>
+      {selectedPokemon && (
+        <div>
+          <h2>{selectedPokemon.name}</h2>
+          <img
+            src={selectedPokemon.sprites.front_default}
+            alt={selectedPokemon.name}
+          />
+          <p>Height: {selectedPokemon.height}</p>
+          <p>Weight: {selectedPokemon.weight}</p>
+        </div>
+      )}
     </div>
   </>);
 }
