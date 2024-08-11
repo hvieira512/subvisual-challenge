@@ -1,0 +1,49 @@
+/*Font*/
+@font-face {
+    font-family: 'Colfax';
+    src: url('./fonts/Colfax-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Colfax';
+    src: url('./fonts/Colfax-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/*Variables*/
+:root {
+
+}
+
+/*CSS Reset*/
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0 }
+
+body {
+    font-family: 'Colfax', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select { font: inherit }
+
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word }
+
+#root, #__next { isolation: isolate }
+
+/*General Styling*/
+a {
+    text-decoration: none;
+    color: var(--alternative);
+}
+
+a:where(:hover, :focus) { text-decoration: underline }
