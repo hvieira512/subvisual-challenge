@@ -4,6 +4,8 @@ import PokemonInfo from './components/PokemonInfo/PokemonInfo.jsx';
 import Button from './components/Button/Button.jsx';
 import './main.css';
 
+const cache = {};
+
 const App = () => {
   const [pokeList, setPokeList] = useState([]);
   const [filteredPokeList, setFilteredPokeList] = useState([]);
@@ -14,8 +16,11 @@ const App = () => {
 
   // Fetch all the Pokémons
   const fetchPokeData = async () => {
+    if (cache['allPokemons']) return cache['allPokemons'];
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1025');
+    console.log("API REQUEST");
     const data = await response.json();
+    cache['allPokemons'] = data.results;
     return data.results;
   }
 
@@ -55,9 +60,18 @@ const App = () => {
   }
 
   const fetchPokemonData = async (pokemon, setSelectedPokemon, setError) => {
+    if (cache[`pokemon_${pokemon}`]) {
+      setSelectedPokemon(cache[`pokemon_${pokemon}`]);
+      setCurPokeId(cache[`pokemon_${pokemon}`].id);
+      setError(null);
+      return;
+    }
+
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+      console.log("API REQUEST");
       const data = await response.json();
+      cache[`pokemon_${pokemon}`] = data;  // Cache the result
       setSelectedPokemon(data);
       setCurPokeId(data.id);
       setError(null);
