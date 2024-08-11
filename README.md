@@ -1,16 +1,21 @@
 # Overview
 
-Hi there! Here is my attempt of solving the challenge that was proposed to me!
-Overal I think I did great job, since I am learning React by myself.
-This project taught me a lot of things, how are components rendered, how does the Virtual DOM work, how to fetch data from an API, among others. And mainly, I had fun coding it!
+Hi there! Here is my attempt of solving the **Subvisual Challenge**!
+
+Overall I think I did well, even tho I am learning React by myself.
+This project taught me a lot of things, how are components rendered, how does the Virtual DOM work, how to fetch data from an API, among others.
+
+And mainly, I had fun coding it!
 
 ## Struggles
 My main struggle was using useEffect since I've didn't had a lot of experience with it, but after completing this project, I got a pretty good grasp of how it works.
 
 ## Features
 In terms of features, I've added a few things:
-- 1. Added a Preview List: while the user is searching, a list will appear with the possible matches. Since I was already trying to compare the best matches, I saw this as an opportunity to show the user what Pokémon he might be trying to find.
-- 2. Created a Reset Button: in case the user wants to go back to the start.
+
+1. **Added a Preview List**: while the user is searching, a list will appear with the possible matches. Since I was already trying to compare the best matches, I saw this as an opportunity to show the user what Pokémon he might be trying to find.
+2. **Created a Reset Button**: in case the user wants to go back to the start.
+
 I did not complete automated tests since I did not had the time for it
 
 # Installation
@@ -18,11 +23,11 @@ I did not complete automated tests since I did not had the time for it
 In order to install this project, you'll need node and npm installed on your system:
 
 
-## Through a Package Manager
+## Package Manager
 
 1. **Install NodeJS and NPM**
 
-   If you're using Linux, use your preferred one to install it
+   If you prefer using a package manger, use your preferred one to install it
 
    ```bash
    # Ubuntu
@@ -36,6 +41,8 @@ In order to install this project, you'll need node and npm installed on your sys
 
    # Homebrew (macOS)
    brew install node
+   
+   # Others...
    ```
 
    You should see the version numbers for Node.js and npm.
@@ -73,11 +80,11 @@ If you're on Windows, follow these steps:
 
 1. **Download Node.js Installer**
 
-   Visit the [Node.js official website](https://nodejs.org/) and download the macOS installer (.pkg file). Choose the LTS (Long Term Support) version for stability.
+   Visit the [Node.js official website](https://nodejs.org/) and download the macOS installer (`.pkg` file). Choose the LTS (Long Term Support) version for stability.
 
 2. **Run the Installer**
 
-   Open the downloadead '.pkg' file and follow the installation prompts:
+   Open the downloadead `.pkg` file and follow the installation prompts:
 
    - Click "Continue" through the welcome screens.
    - Accept the license agreement.
