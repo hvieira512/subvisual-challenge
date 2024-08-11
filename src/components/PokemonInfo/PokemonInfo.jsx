@@ -10,8 +10,8 @@ const PokemonInfo = ({ pokemon }) => {
                 <img src={pokemon.sprites.front_default} alt={pokemon.name} />
             </div>
             <div className="flex gap-1 align-items-center justify-content-center">
-                <p>Height: {pokemon.height}</p>
-                <p>Weight: {pokemon.weight}</p>
+                <p>Height: {pokemon.height}m</p>
+                <p>Weight: {pokemon.weight}kg</p>
             </div>
         </div>
     );
