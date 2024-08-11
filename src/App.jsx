@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getBestMatch } from './utils/utils.js';
+import { capitalize, getBestMatch } from './utils/utils.js';
 import PokemonInfo from './components/PokemonInfo/PokemonInfo.jsx';
 import Button from './components/Button/Button.jsx';
 import './main.css';
@@ -18,7 +18,6 @@ const App = () => {
   const fetchPokeData = async () => {
     if (cache['allPokemons']) return cache['allPokemons'];
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1025');
-    console.log("API REQUEST");
     const data = await response.json();
     cache['allPokemons'] = data.results;
     return data.results;
@@ -69,7 +68,6 @@ const App = () => {
 
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-      console.log("API REQUEST");
       const data = await response.json();
       cache[`pokemon_${pokemon}`] = data;  // Cache the result
       setSelectedPokemon(data);
@@ -88,37 +86,34 @@ const App = () => {
     if (bestMatch) await fetchPokemonData(bestMatch, setSelectedPokemon, setError);
   }
 
-  const handlePrevious = () => { if (curPokeId > 1) setCurPokeId(curPokeId - 1); }
-  const handleNext = () => { if (curPokeId < 1025) setCurPokeId(curPokeId + 1); }
+  const handlePrevious = () => { if (curPokeId > 1) setCurPokeId(prevPokeId => prevPokeId - 1); }
+  const handleNext = () => { if (curPokeId < 1025) setCurPokeId(nextPokeId => nextPokeId + 1); }
+  const handleReset = () => { if (curPokeId < 1025) setCurPokeId(resetPokeId => resetPokeId = 1); }
 
   return (<>
-    <div className="App">
+    <div className="App flex gap-1 flex-direction-column">
       <h1>Subvisual Challenge</h1>
-      <form onSubmit={handleSearchSubmit}>
-        <input type="text" placeholder="Search Pokemon..." value={searchQuery} onChange={handleSearchChange} />
-        <button type="submit">Search</button>
-      </form>
+
+      <div id="search">
+        <form className='flex align-items-center justify-content-space-between' onSubmit={handleSearchSubmit}>
+          <input type="text" placeholder="Search Pokemon..." value={searchQuery} onChange={handleSearchChange} />
+          <Button icon="🔍︎" text="Search" />
+        </form>
+
+        <div id="pokemon-matches">
+          <ul>
+            {filteredPokeList.map((pokemon, index) => (
+              <li key={index}>{capitalize(pokemon)}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
       {error && <p>{error}</p>}
-      <ul>
-        {filteredPokeList.map((pokemon, index) => (
-          <li key={index}>{pokemon}</li>
-        ))}
-      </ul>
       {selectedPokemon && <PokemonInfo pokemon={selectedPokemon} />}
-      <div className="navigation">
-        <Button
-          onClick={handlePrevious}
-          disabled={curPokeId === 1}
-          icon="←"
-          text="Back"
-        />
-        <Button
-          onClick={handleNext}
-          disabled={curPokeId === 1025}
-          icon="→"
-          text="Next"
-          order="reversed"
-        />
+      <div id="navigation" className="flex gap-1 align-items-center justify-content-space-around">
+        <Button onClick={handlePrevious} disabled={curPokeId === 1} icon="←" text="Back" />
+        <Button onClick={handleReset} icon="↻" text="Restart" />
+        <Button onClick={handleNext} disabled={curPokeId === 1025} icon="→" text="Next" order="reversed" />
       </div>
     </div>
   </>);

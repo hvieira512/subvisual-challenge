@@ -15,18 +15,31 @@
 
 /*Variables*/
 :root {
+    --bg-pokemon-display: #e8f4ff;
+    --text-clr: #403f4c;
+    --alternative-clr: #045cfc;
+    --light-alternative-clr: #e8f4ff;
 
+    --bg-btn: var(--alternative-clr);
+    --body-bg: #f9f9f9;
 }
 
 /*CSS Reset*/
-*, *::before, *::after { box-sizing: border-box; }
+* {
+    margin: 0;
+    outline: var(--alternative-clr);
+}
 
-* { margin: 0 }
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
     font-family: 'Colfax', sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    display: grid;
+    height: 100vh;
+    place-items: center;
+    background-color: var(--body-bg);
 }
 
 img, picture, video, canvas, svg {
@@ -40,6 +53,16 @@ p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word }
 
 #root, #__next { isolation: isolate }
 
+/* Utilitary Classes */
+.flex { display: flex }
+.gap-1 { gap: 1rem }
+.flex-direction-column { flex-direction: column }
+.justify-content-center { justify-content: center }
+.justify-content-space-evenly { justify-content: space-evenly }
+.justify-content-space-around { justify-content: space-around }
+.justify-content-space-between { justify-content: space-between }
+.align-items-center { align-items: center }
+
 /*General Styling*/
 a {
     text-decoration: none;
@@ -47,3 +70,77 @@ a {
 }
 
 a:where(:hover, :focus) { text-decoration: underline }
+
+input[type="text"], .btn {
+    background-color: transparent;
+    color: var(--bg-btn);
+    border: 1px solid var(--bg-btn);
+    padding: 0.5em 2em;
+    border-radius: 410px;
+}
+
+ul { list-style: none; padding: 0px; }
+
+h1, h2, h3, h4, h5 { color: var(--alternative-clr); text-align: center; }
+
+/* App */
+.App {
+    max-width: 600px;
+    background-color: var(--light-alternative-clr);
+    padding: 2em 3em;
+    border-radius: .5em;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);;
+}
+
+/* Button */
+.btn {
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.btn:hover {
+    background-color: var(--bg-btn);
+    color: white;
+    gap: .5rem;
+}
+
+.btn[disabled] {
+    opacity: 0.8;
+    border-color: var(--text-clr);
+    color: var(--text-clr);
+    cursor: pointer;
+}
+
+.btn[disabled]:hover {
+    background-color: white;
+    gap: 1rem;
+    cursor: not-allowed;
+}
+
+/* Search */
+#search { position: relative }
+
+#search button {
+    background-color: var(--bg-btn);
+    color: white;
+    gap: .5rem;
+}
+
+#search input { max-width: 55%; background-color: var(--body-bg); }
+#search button:hover { transform: scale(1.1); }
+
+#pokemon-matches {
+    position: absolute;
+    background-color: var(--body-bg);
+    z-index: 2;
+}
+
+#pokemon-matches ul { border: 1px solid var(--bg-btn); }
+
+#pokemon-matches ul li {
+    padding: .5em 1em;
+}
+
+/* Hide #pokemon-matches when #search input is focused */
+#pokemon-matches { visibility: hidden }
+#search:has(input:focus) #pokemon-matches { visibility: visible }

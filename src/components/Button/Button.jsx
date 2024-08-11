@@ -2,18 +2,22 @@ import PropTypes from 'prop-types';
 
 const Button = ({ onClick, disabled, icon, text, order = "normal" }) => {
     return (
-        <button className="btn" onClick={onClick} disabled={disabled}>
-            {order === "normal" && <span className="icon">{icon}</span>}
-            <span className="text">{text}</span>
-            {order === "reversed" && <span className="icon">{icon}</span>}
+        <button
+            className="btn flex gap-1"
+            {...(onClick ? { onClick } : {})}
+            {...(disabled !== undefined ? { disabled } : {})}
+        >
+            {order === "normal" && <div className="icon">{icon}</div>}
+            <div className="text">{text}</div>
+            {order === "reversed" && <div className="icon">{icon}</div>}
         </button>
 
     );
 }
 
 Button.propTypes = {
-    onClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool.isRequired,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
     icon: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     order: PropTypes.string,
