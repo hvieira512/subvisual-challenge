@@ -11,13 +11,14 @@ const App = () => {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [curPokeId, setCurPokeId] = useState(1);
 
+  // Fetch all the Pokémons
   const fetchPokeData = async () => {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1025');
     const data = await response.json();
     return data.results;
   }
 
-  // Fetch the Pokemon Names Data when the component mounts
+  // Fetch when the component mounts
   useEffect(() => {
     const loadPokeData = async () => {
       setPokeList(await fetchPokeData());
@@ -25,6 +26,7 @@ const App = () => {
     loadPokeData();
   }, []);
 
+  // Do this every time the value of curPokeId changes
   useEffect(() => {
     const loadPokemonById = async () => {
       await fetchPokemonData(curPokeId, setSelectedPokemon, setError);
@@ -32,6 +34,8 @@ const App = () => {
     loadPokemonById();
   }, [curPokeId]);
 
+  // Do this every time the input is changed 
+  // within 3 characters minimum
   useEffect(() => {
     if (searchQuery.length >= 3) {
       const pokeNames = pokeList.map(pokemon => pokemon.name);
@@ -44,6 +48,7 @@ const App = () => {
     }
   }, [searchQuery, pokeList]);
 
+  // Stop default behaviour of the submit button
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   }
@@ -53,6 +58,7 @@ const App = () => {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
       const data = await response.json();
       setSelectedPokemon(data);
+      setCurPokeId(data.id);
       setError(null);
     } catch {
       setSelectedPokemon(null);
