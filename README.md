@@ -2,24 +2,25 @@
 
 Hi there! Here is my attempt of solving the **Subvisual Challenge**!
 
-Overall I think I did well, even tho I am learning React by myself.
+Overall I think I did well, even though I am learning React by myself.
 This project taught me a lot of things, how are components rendered, how does the Virtual DOM work, how to fetch data from an API, among others.
 
 And mainly, I had fun coding it!
 
 ## Struggles
+
 My main struggle was using useEffect since I've didn't had a lot of experience with it, but after completing this project, I got a pretty good grasp of how it works.
 
 ## Features
+
 In terms of features, I've added a few things:
 
 1. **Added a Preview List**: while the user is searching, a list will appear with the possible matches. Since I was already trying to compare the best matches, I saw this as an opportunity to show the user what Pokémon he might be trying to find.
-2. **Created a Reset Button**: in case the user wants to go back to the start. 
+2. **Created a Reset Button**: in case the user wants to go back to the start.
 
 # Installation
 
 In order to install this project, you'll need node and npm installed on your system:
-
 
 ## Package Manager
 
@@ -39,7 +40,7 @@ In order to install this project, you'll need node and npm installed on your sys
 
    # Homebrew (macOS)
    brew install node
-   
+
    # Others...
    ```
 
@@ -63,7 +64,7 @@ If you're on Windows, follow these steps:
 2. **Run the Installer**
 
    Open the downloaded `.msi` file and follow the installation wizard:
-   
+
    - Click "Next" on the welcome screen.
    - Accept the license agreement and click "Next".
    - Choose the installation path or leave it as default and click "Next".
@@ -72,14 +73,14 @@ If you're on Windows, follow these steps:
 
 3. **Verify if everything was installed correctly**
 
-    Open your Command Prompt (cmd) and run the following commands:
+   Open your Command Prompt (cmd) and run the following commands:
 
-    ```bash
-    node -v
-    npm -v
-    ```
+   ```bash
+   node -v
+   npm -v
+   ```
 
-    You should see the version numbers for Node.js and npm.
+   You should see the version numbers for Node.js and npm.
 
 # macOS
 
@@ -124,7 +125,7 @@ If you're on Windows, follow these steps:
    cd subvisual-challenge
    npm i # or npm install
    ```
-   
+
    After the dependencies were installed, let's finally start the project!
 
    ```bash
@@ -138,6 +139,7 @@ If you're on Windows, follow these steps:
    ```
 
 # Troubleshooting
+
 If you encounter any issues, try the following:
 
 - Ensure you have the correct versions of Node.js and npm/yarn installed.
