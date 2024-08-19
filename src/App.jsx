@@ -145,20 +145,9 @@ const App = () => {
           id="navigation"
           className="flex gap-1 align-items-center justify-content-space-around"
         >
-          <Button
-            onClick={handlePrevious}
-            disabled={curPokeId === 1}
-            icon="←"
-            text="Back"
-          />
+          <Button onClick={handlePrevious} icon="←" text="Back" />
           <Button onClick={handleReset} icon="↻" text="Restart" />
-          <Button
-            onClick={handleNext}
-            disabled={curPokeId === 1025}
-            icon="→"
-            text="Next"
-            order="reversed"
-          />
+          <Button onClick={handleNext} icon="→" text="Next" order="reversed" />
         </div>
       </div>
     </>

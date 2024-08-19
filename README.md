@@ -2,7 +2,6 @@
 
 Hi there! Here is my attempt of solving the **Subvisual Challenge**!
 
-Overall I think I did well, even though I am learning React by myself.
 This project taught me a lot of things, how are components rendered, how does the Virtual DOM work, how to fetch data from an API, among others.
 
 And mainly, I had fun coding it!
